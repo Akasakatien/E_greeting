@@ -1,0 +1,314 @@
+﻿@model DoAnHK3_4.Models.Account
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_MyAdminLayoutPage.cshtml";
+    var listQuestion = new List<SelectListItem>
+  ()
+    {
+       new SelectListItem{Text="What the hell u thing?",Value="What the fuck u thing?"},
+    new SelectListItem{Text="Do u want dizz no flower",Value="Do u want dizz no flower"},
+    new SelectListItem{Text="What r u looking for?",Value="What r u looking for?"},
+        new SelectListItem{Text="Where did you speed your childhood summers?",Value="Where did you speed your childhood summers?"},
+        new SelectListItem{Text="What was the last name of your favorite teacher?",Value="What was the last name of your favorite teacher?"},
+         new SelectListItem{Text="What was your favorite food as a child?",Value="What was your favorite food as a child?"},
+    };
+    var list = new List<SelectListItem>(){
+                      new SelectListItem{Text="An Giang",Value="An Giang"},
+new SelectListItem{Text="Bà Rịa - Vũng Tàu",Value="Bà Rịa - Vũng Tàu"},
+new SelectListItem{Text="Bắc Giang",Value="Bắc Giang"},
+new SelectListItem{Text="Bắc Kạn",Value="Bắc Kạn"},
+new SelectListItem{Text="Bạc Liêu",Value="Bạc Liêu"},
+new SelectListItem{Text="Bắc Ninh",Value="Bắc Ninh"},
+new SelectListItem{Text="Bến Tre",Value="Bến Tre"},
+new SelectListItem{Text="Bình Định",Value="Bình Định"},
+new SelectListItem{Text="Bình Dương",Value="Bình Dương"},
+new SelectListItem{Text="Bình Phước",Value="Bình Phước"},
+new SelectListItem{Text="Bình Thuận",Value="Bình Thuận"},
+new SelectListItem{Text="Cà Mau",Value="Cà Mau"},
+new SelectListItem{Text="Cao Bằng",Value="Cao Bằng"},
+new SelectListItem{Text="Đắk Lắk",Value="Đắk Lắk"},
+new SelectListItem{Text="Đắk Nông",Value="Đắk Nông"},
+new SelectListItem{Text="Điện Biên",Value="Điện Biên"},
+new SelectListItem{Text="Đồng Nai",Value="Đồng Nai"},
+new SelectListItem{Text="Đồng Tháp",Value="Đồng Tháp"},
+new SelectListItem{Text="Gia Lai",Value="Gia Lai"},
+new SelectListItem{Text="Hà Giang",Value="Hà Giang"},
+new SelectListItem{Text="Hà Tĩnh",Value="Hà Tĩnh"},
+new SelectListItem{Text="Hải Dương",Value="Hải Dương"},
+new SelectListItem{Text="Hậu Giang",Value="Hậu Giang"},
+new SelectListItem{Text="Hòa Bình",Value="Hòa Bình"},
+new SelectListItem{Text="Hưng Yên",Value="Hưng Yên"},
+new SelectListItem{Text="Khánh Hòa",Value="Khánh Hòa"},
+new SelectListItem{Text="Kiên Giang",Value="Kiên Giang"},
+new SelectListItem{Text="Kon Tum",Value="Kon Tum"},
+new SelectListItem{Text="Lai Châu",Value="Lai Châu"},
+new SelectListItem{Text="Lâm Đồng",Value="Lâm Đồng"},
+new SelectListItem{Text="Lạng Sơn",Value="Lạng Sơn"},
+new SelectListItem{Text="Lào Cai",Value="Lào Cai"},
+new SelectListItem{Text="Long An",Value="Long An"},
+new SelectListItem{Text="Nam Định",Value="Nam Định"},
+new SelectListItem{Text="Nghệ An",Value="Nghệ An"},
+new SelectListItem{Text="Ninh Bình",Value="Ninh Bình"},
+new SelectListItem{Text="Ninh Thuận",Value="Ninh Thuận"},
+new SelectListItem{Text="Phú Thọ",Value="Phú Thọ"},
+new SelectListItem{Text="Quảng Bình",Value="Quảng Bình"},
+new SelectListItem{Text="Quảng Ngãi",Value="Quảng Ngãi"},
+new SelectListItem{Text="Quảng Ninh",Value="Quảng Ninh"},
+new SelectListItem{Text="Quảng Trị",Value="Quảng Trị"},
+new SelectListItem{Text="Sóc Trăng",Value="Sóc Trăng"},
+new SelectListItem{Text="Sơn La",Value="Sơn La"},
+new SelectListItem{Text="Tây Ninh",Value="Tây Ninh"},
+new SelectListItem{Text="Thái Bình",Value="Thái Bình"},
+new SelectListItem{Text="Thái Nguyên",Value="Thái Nguyên"},
+new SelectListItem{Text="Thanh Hóa",Value="Thanh Hóa"},
+new SelectListItem{Text="Thừa Thiên Huế",Value="Thừa Thiên Huế"},
+new SelectListItem{Text="Tiền Giang",Value="Tiền Giang"},
+new SelectListItem{Text="Trà Vinh",Value="Trà Vinh"},
+new SelectListItem{Text="Tuyên Quang",Value="Tuyên Quang"},
+new SelectListItem{Text="Vĩnh Long",Value="Vĩnh Long"},
+new SelectListItem{Text="Vĩnh Phúc",Value="Vĩnh Phúc"},
+new SelectListItem{Text="Yên Bái",Value="Yên Bái"},
+new SelectListItem{Text="Phú Yên",Value="Phú Yên"},
+new SelectListItem{Text="Đà Nẵng",Value="Đà Nẵng"},
+new SelectListItem{Text="Hải Phòng",Value="Hải Phòng"},
+new SelectListItem{Text="Hà Nội",Value="Hà Nội"},
+new SelectListItem{Text="TP HCM",Value="TP HCM"},
+new SelectListItem{Text="Hà Nam",Value="Hà Nam"},
+new SelectListItem{Text="Cần Thơ",Value="Cần Thơ"},
+new SelectListItem{Text="Quảng Nam",Value="Quảng Nam"},
+                 };
+    var listGender = new List<SelectListItem>()
+    {
+        new SelectListItem{Text="Male",Value="Male"},
+        new SelectListItem{Text="Female",Value="Female"},
+         new SelectListItem{Text="Other",Value="Other"},
+    };
+}
+  
+
+  
+
+    @using (Html.BeginForm("Create", "Accounts", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <h3 class="box-title m-b-0">Create new Account</h3>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="exampleInputuname" class="col-sm-3 control-label">@Html.LabelFor(model => model.username)*</label>
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="ti-user"></i></div>
+                                    @Html.EditorFor(model => model.username, new { htmlAttributes = new { @*required = "required",*@ type = "text", id="exampleInputuname", placeholder="Username",  @class="form-control" } })
+                                    @*<input type="text" class="form-control" id="exampleInputuname" placeholder="Username">*@
+                                </div>
+                                <div class="help-block with-errors">@Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })</div>
+
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label">@Html.LabelFor(model => model.password)*</label>
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="ti-lock"></i></div>
+                                    @Html.EditorFor(model => model.password, new { htmlAttributes = new {type = "password", id="exampleInputpwd2", placeholder="Enter pwd", @class = "form-control" } })
+                                    @*<input type="password" class="form-control" id="exampleInputpwd2" placeholder="Enter pwd">*@
+                                </div>
+                                <div class="help-block with-errors">@Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })</div>
+
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                            <label for="inputPassword4" class="col-sm-3 control-label">Re Password*</label>
+                            <div class="col-sm-9">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="ti-lock"></i></div>
+                                    <input type="password" class="form-control" id="exampleInputpwd2" placeholder="Re Enter pwd">
+                                </div>
+                            </div>
+                        </div>*@
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="col-sm-3 control-label">@Html.LabelFor(model => model.question)*</label>
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="icon-question"></i></div>
+                                    @Html.DropDownListFor(model => model.question, listQuestion, htmlAttributes: new { @class = "form-control" })
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">@Html.LabelFor(model => model.answer)*</label>
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="ti-world"></i></div>
+                                    @Html.EditorFor(model => model.answer, new { type = "text", id="exampleInputpwd1", placeholder="Enter Answer The Question", htmlAttributes = new { @class = "form-control" } })
+                                    @*<input type="text" class="form-control" id="exampleInputpwd1" placeholder="Enter Website Name">*@
+                                </div>
+                                <div class="help-block with-errors">@Html.ValidationMessageFor(model => model.answer, "",new { @class = "text-danger" })</div>
+
+                            </div>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="col-sm-3 control-label">@Html.LabelFor(model => model.roldId, "roldId")*</label>
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="icon-question"></i></div>
+                                    @Html.DropDownList("roldId", null, htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-body">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">@Html.LabelFor(model => model.firstName)</label>
+                                        @Html.EditorFor(model => model.firstName, new { type = "text", id = "firstName", placeholder = "First Name", htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">@Html.LabelFor(model => model.lastName)</label>
+                                        @Html.EditorFor(model => model.lastName, new
+                   {
+                       type = "text",
+                       id = "lastName",
+                       placeholder = "Last Name",
+                       htmlAttributes = new { @class = "form-control" }
+                   })
+
+
+
+
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">@Html.LabelFor(model => model.gender)</label>
+                                        @Html.DropDownListFor(model => model.gender, listGender, htmlAttributes: new { @class = "form-control" })
+                                        <span class="help-block"> Select your gender </span>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">@Html.LabelFor(model => model.country)</label>
+                                        @Html.DropDownListFor(model => model.country, list, htmlAttributes: new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">@Html.LabelFor(model => model.mobile)</label>
+                                        @Html.EditorFor(model => model.mobile, new
+                   {
+                       type = "text"@*, id = "firstName"*@,
+                       placeholder = "Phone Number",
+                       htmlAttributes = new { @class = "form-control" }
+                   })
+
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">@Html.LabelFor(model => model.address)</label>
+                                        @Html.EditorFor(model => model.address, new
+                   {
+                       type = "text"@*, id = "firstName"*@,
+                       placeholder = "Address",
+                       htmlAttributes = new { @class = "form-control" }
+                   })
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                        </div>
+
+                        <div class="form-group m-b-0">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-info waves-effect waves-light">Create</button>
+                                <a class="btn btn-default" href="@Url.Action("Index", "Accounts")">Cancel </a>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+      
+
+
+        @*<div class="form-horizontal">
+                <h4>Account</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.question, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.question, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.question, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.answer, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.answer, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.answer, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.roldId, "roldId", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("roldId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.roldId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>*@
+    
+
+
+}

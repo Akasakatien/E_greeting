@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyLayoutPage.cshtml";
+}
+
+
+@using System.Configuration
+@using DoAnHK3_4.Models
+@{
+
+    GreetingDatabaseEntities greeting = new GreetingDatabaseEntities();
+    var lt = greeting.Services.ToList();
+}
+<style>
+    td.old {
+        padding-left: 10px;
+    }
+
+    .khoangtrang {
+        margin-bottom: 100px;
+    }
+
+    .khoangtrangRis {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        font-size: 20px;
+    }
+</style>
+
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
+      rel="stylesheet" type="text/css" />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+           
+                <div class="khoangtrang"></div>
+           
+       
+            <table style="width:500px;margin-left: 358px;">
+                <tr>
+                    <td><div class="khoangtrangRis">MemberShip</div></td>
+                </tr>
+                <tr>
+                    <td>  @ViewBag.Error</td>
+                    <td style=" height:100px">
+                        @foreach (var item in lt)
+                        {
+                            @*@Html.DropDownListFor(model=>model.name,(List<SelectListItem>)ViewBag.lst, "Value","Text")*@
+                            <a href="@Url.Action("Registerpayment", "RegisterRembership", new { id = item.id })">
+                                <i class="btn btn-primary">
+                                    @item.name Month
+                                    <br />
+                                    @item.price $
+                                </i>
+                            </a>
+                        }
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <th>Name Membership</th>
+                    <th>Price</th>
+                </tr>
+           
+                <tr>
+
+                    <td>@ViewBag.id</td>
+                    <td>@ViewBag.price $</td>
+                </tr>
+                <tr>
+                        <td>
+                            <form action="@ConfigurationManager.AppSettings["urlSubmitPayment"]"    method="post">
+
+                                <!-- Identify your business so that you can collect the payments. -->
+                                <input type="hidden" name="business" value="@ConfigurationManager.AppSettings["accountBusiness"]">
+                                <input type="hidden" name="return" value="@ConfigurationManager.AppSettings["urlReturn"]" />
+                                <!-- Specify a Buy Now button. -->
+                                <input type="hidden" name="cmd" value="_xclick">
+
+                                <!-- Specify details about the item that buyers will purchase. -->
+                                <input type="hidden" name="item_name" value="Checkout">
+                                <input type="hidden" name="amount" value="@ViewBag.price">
+                                <input type="hidden" name="currency_code" value="USD">
+
+                                <!-- Display the payment button. -->
+                                <input type="image" name="submit" border="0"
+                                       src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_buynow_107x26.png"
+                                       alt="Buy Now">
+                                <img alt="" border="0" width="1" height="1"
+                                     src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
+
+                            </form>
+                        </td>
+                    </tr>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
+
+
+            <div class="khoangtrang"></div>
+
+
+
+                            
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+

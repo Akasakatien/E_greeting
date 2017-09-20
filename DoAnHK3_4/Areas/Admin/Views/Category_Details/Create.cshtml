@@ -1,0 +1,87 @@
+﻿@model DoAnHK3_4.Models.Category_Details
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_MyAdminLayoutPage.cshtml";
+    var listStatus = new List<SelectListItem> ()
+    {
+    new SelectListItem{Text="True",Value="True"},
+    new SelectListItem{Text="False",Value="False"},
+    };
+}
+<link href="@Url.Content("~/Content/")admin/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+
+
+<h2>Add New</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Category Details</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.dateOfEvent, "Date Of Event", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.dateOfEvent, new { htmlAttributes = new { id = "datepicker-autoclose", placeholder = "mm/dd/yyyy", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.dateOfEvent, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.status, listStatus, htmlAttributes: new { @class = "form-control" })
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.categoryID, "Category Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("categoryID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.categoryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+                <a class="btn btn-default" href="@Url.Action("Index", "Category_Details")">Cancel </a>
+
+            </div>
+        </div>
+        
+    </div>
+}
+
+
+
+<script src="@Url.Content("~/Content/")admin/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script>
+ 
+     // Date Picker
+     //jQuery('.mydatepicker, #datepicker').datepicker();
+     jQuery('#datepicker-autoclose').datepicker({
+         autoclose: true,
+         todayHighlight: true
+     });
+
+
+
+
+</script>
+

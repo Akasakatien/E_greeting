@@ -1,0 +1,94 @@
+﻿@model IEnumerable<DoAnHK3_4.Models.Account>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_MyAdminLayoutPage.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <h1>List of account</h1>
+            <h3>@Html.ActionLink("Create", "Create")</h3>
+            <h1 class="text-danger">@ViewContext.TempData["error"]</h1> 
+
+            <div class="table-responsive">
+                <table id="myTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.username)
+                            </th>
+                            @*<th>
+                                @Html.DisplayNameFor(model => model.password)
+                            </th>*@
+                            <th>
+                                @Html.DisplayNameFor(model => model.question)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.answer)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.facebook)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Role.name)
+                            </th>
+                            <th>Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       @foreach (var item in Model)
+                       {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.username)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.password)
+                            </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.question)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.answer)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.facebook)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Role.name)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                                <a href="@Url.Action("PaymentForAccount", "Payments", new { id = item.id })">Payment</a>
+                                <a href="@Url.Action("Delete", "Accounts", new { id = item.id })" onclick="return confirm('Are you sure?')">Delete</a></td>
+                        </tr>
+                       }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+    
+
+</script>
+
+
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+﻿@model DoAnHK3_4.Models.Greeting
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_MyAdminLayoutPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Greeting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.photo)
+        </dt>
+
+        <dd>
+            <img src="@Url.Content("~/Content/uploadedgreeting" + Model.photo)" width="220" />
+        </dd>
+        @if (Model.video != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.video)
+            </dt>
+        }
+        
+
+        <dd>
+            <video controls>            <source src="@Url.Content("~/Content/uploadedgreeting/video" + Model.video)" type="video/webm" />
+            </video>
+            @*<video type="webm" src="" controls width="220"/>*@
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category_Details.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category_Details.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

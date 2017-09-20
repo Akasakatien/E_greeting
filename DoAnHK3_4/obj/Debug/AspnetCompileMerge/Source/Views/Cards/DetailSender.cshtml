@@ -1,0 +1,243 @@
+﻿
+@{
+    ViewBag.Title = "DetailSender";
+    Layout = "~/Views/Shared/_MyLayoutPage.cshtml";
+}
+<div class="page-heading">
+    <div class="container">
+        <h2>Sender Details</h2>
+        <p>Add Multiple Recipient, Import Contact from Social Network</p>
+    </div>
+</div>
+
+<div class="contant">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="blog">
+
+
+                </div>
+
+                <div class="form-box">
+                    <form action="send-card.php" id="uploadimage" autocomplete="off" method="post" enctype="multipart/form-data" onsubmit="return validateTester();">
+                        <div class="form-body">
+
+
+
+
+                            <h2>Sender Details</h2>
+
+                            <div id="message" style="display: none;">message here</div>
+
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <label>Sender's Name</label>
+                                    <input type="text" name="txtSenderName" class="input-block-level" value="Tien Akasaka" readonly="">
+                                </div>
+
+
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span4">
+                                    <input type="radio" id="radio01" name="radio" value="Selected1" onclick="Toggle(1);" checked="checked">
+                                    <label for="radio01"><span></span>Add Recipients</label>
+
+                                </div>
+                                <div id="addEmail">
+
+                                    <table id="dataTable" align="left">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input name="chk" type="checkbox" class="ctrl">
+                                                </td>
+                                                <td>
+
+
+                                                    <input name="txtRecepientName[]" value="Name" onclick="this.value=''" onfocus="this.select()" onblur="this.value=!this.value?Name" type="text" class="Txt" size="20" maxlength="50">
+
+                                                    <font color="red"><b> *</b></font>
+                                                </td>
+                                                <td>
+                                                    <!--<input name="txtRecepientEmail[]" id="txtRecepientEmail[]" value="Email" onclick="this.value=''" onfocus="this.select()" onblur="this.value=!this.value?Email"  type="text" class="Txt" size="20" maxlength="70">-->
+
+
+                                                    <input name="txtRecepientEmail[]" id="txtRecepientEmail[]" placeholder="Email" type="text" class="Txt" size="20" maxlength="70">
+
+
+
+                                                    <font color="red"><b> *</b></font>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <table id="dataTableHeading" style="float:left;">
+
+                                        <tbody>
+                                            <tr>
+                                                <td>&nbsp;</td>
+
+                                                <td><input type="button" value="Add Row" onclick="addRow('dataTable')" class="egreet red button" style="float: left;padding: 10px;"></td>
+
+                                                <td><input type="button" value="Delete Row" onclick="deleteRow('dataTable')" class="egreet red button" style="float: left;padding: 10px;"></td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+
+                                <div id="uploadEmail" style="display:none;">
+
+                                    <!--<input type="file" name="file" id="file"  />-->
+
+                                    <div class="fileUpload btn btn-primary">
+                                        <span>Upload CSV/Text</span>
+                                        <input type="file" name="file" id="file" class="upload">
+                                    </div>
+
+
+
+                                    <a href="" class="initialism slide_open" data-popup-ordinal="0" id="open_62503011">Read Instruction</a>
+
+
+
+
+
+
+                                </div>
+
+
+                            </div>
+
+
+
+
+
+                            <div class="row-fluid">
+                                <div class="span4"></div>
+                                <div class="span4"></div>
+                                <div class="span4">
+                                    <label>Schedule Greeting</label>
+                                    <input type="text" id="date" name="txtSendOnDate" placeholder="Select Schedule Date" data-field="date">(MM-DD-YYYY)
+
+                                    <!--<input type="text" id="date" name="txtSendOnDate" />-->
+
+                                </div>
+
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span4">
+                                    <label>&nbsp;</label>
+                                </div>
+
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span10">
+                                    <button type="submit" class="btn-style pull-right" name="submit" value="submit">Submit</button>
+                                </div>
+                                <div class="span2">
+                                    <a href="DestroySession.php"><button type="button" class="btn-style pull-right">Discard</button></a>
+
+                                    <input type="hidden" name="csrf_token" value="50466961205045457101374175431959">
+
+                                    <input type="hidden" name="is_desig_valid" id="is_desig_valid" value="y">
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <!--CONTANT END-->
+    <div id="dtBox" class="dtpicker-overlay dtpicker-mobile"><div class="dtpicker-bg"><div class="dtpicker-cont"><div class="dtpicker-content"><div class="dtpicker-subcontent"></div></div></div></div></div>
+    <script>
+$(document).ready(function () {
+    $('#slide').popup({
+        focusdelay: 400,
+        outline: true,
+        vertical: 'top'
+    });
+});
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+                $("#dtBox").DateTimePicker(
+                {
+                        dateFormat: "yyyy-MM-dd"
+                });
+        });
+
+
+	function update_desig( new_desig )// function added for designation module
+	{
+		//alert(" inside update desig func value is "+new_desig);
+
+		$.ajax({
+    		type: 'POST',
+	   	    url: 'ajax_update_desig.php',
+    	    data: {
+            'new_desig': new_desig
+    	    },
+	    success: function(msg)
+	   {
+
+		console.log(" response msg is "+msg);
+
+		if( msg.trim() == 'success' )
+                {
+                        msg = "Designation updated successfully!";
+
+			$('#is_desig_valid').val("y");
+
+                }
+                else if(  msg.trim() == 'invalid' )
+                {
+                        msg = "Designation couldnot be updated, Invalid Designation!";
+
+			$('#is_desig_valid').val("n");
+                }
+                else
+                {
+                        msg = "Designation couldnot be updated!";
+
+			$('#is_desig_valid').val("n");
+                }
+
+                $('#desig_id').html(msg);
+
+    	    }
+});
+
+
+
+	}
+
+
+    </script>
+
+
+
+    <!--FOOTER START-->
+    <footer>
+        <div class="container">
+            <div class="row">
+
+            </div>
+        </div>
+    </footer>
+</div>
+

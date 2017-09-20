@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GreetingDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="30" />
+    <Property Name="question" Type="nvarchar" MaxLength="50" />
+    <Property Name="answer" Type="nvarchar" MaxLength="80" />
+    <Property Name="roldId" Type="int" Nullable="false" />
+    <Property Name="facebook" Type="bit" />
+    <Property Name="firstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="lastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="gender" Type="nvarchar" MaxLength="50" />
+    <Property Name="address" Type="nvarchar" MaxLength="50" />
+    <Property Name="country" Type="nvarchar" MaxLength="50" />
+    <Property Name="mobile" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Category_Details">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="categoryID" Type="int" />
+    <Property Name="dateOfEvent" Type="datetime" />
+    <Property Name="status" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="Greeting">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="photo" Type="varchar" MaxLength="250" />
+    <Property Name="categoryDetailsID" Type="int" />
+    <Property Name="video" Type="varchar" MaxLength="250" />
+    <Property Name="url" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="accountId" />
+      <PropertyRef Name="serviceId" />
+    </Key>
+    <Property Name="accountId" Type="int" Nullable="false" />
+    <Property Name="serviceId" Type="int" Nullable="false" />
+    <Property Name="amount" Type="money" />
+    <Property Name="expiryDate" Type="date" />
+    <Property Name="paymentNumber" Type="int" />
+    <Property Name="Status" Type="bit" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="details" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Sending">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="greetingId" Type="int" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="senderName" Type="nvarchar" MaxLength="50" />
+    <Property Name="rersiveName" Type="nvarchar" MaxLength="50" />
+    <Property Name="addressTo" Type="nvarchar" MaxLength="50" />
+    <Property Name="customMessenger" Type="nvarchar" MaxLength="250" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="int" Nullable="false" />
+    <Property Name="price" Type="money" />
+  </EntityType>
+  <Association Name="FK_Account_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="roldId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Category_Details_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Category_Details" Type="Self.Category_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Category_Details">
+        <PropertyRef Name="categoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Greeting_Category_Details">
+    <End Role="Category_Details" Type="Self.Category_Details" Multiplicity="0..1" />
+    <End Role="Greeting" Type="Self.Greeting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category_Details">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Greeting">
+        <PropertyRef Name="categoryDetailsID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="accountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="serviceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sending_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Sending" Type="Self.Sending" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Sending">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sending_Greeting">
+    <End Role="Greeting" Type="Self.Greeting" Multiplicity="1" />
+    <End Role="Sending" Type="Self.Sending" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Greeting">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Sending">
+        <PropertyRef Name="greetingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GreetingDatabaseModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category_Details" EntityType="Self.Category_Details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Greeting" EntityType="Self.Greeting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sending" EntityType="Self.Sending" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Account_Role" Association="Self.FK_Account_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Category_Details_Category" Association="Self.FK_Category_Details_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Category_Details" EntitySet="Category_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Greeting_Category_Details" Association="Self.FK_Greeting_Category_Details">
+      <End Role="Category_Details" EntitySet="Category_Details" />
+      <End Role="Greeting" EntitySet="Greeting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_Account" Association="Self.FK_Payment_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_Service" Association="Self.FK_Payment_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sending_Account" Association="Self.FK_Sending_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Sending" EntitySet="Sending" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sending_Greeting" Association="Self.FK_Sending_Greeting">
+      <End Role="Greeting" EntitySet="Greeting" />
+      <End Role="Sending" EntitySet="Sending" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyLayoutPage.cshtml";
+}
+@model DoAnHK3_4.ViewModels.AccountViewModels1
+<style>
+    td.old {
+        padding-left: 10px;
+    }
+
+    .khoangtrang {
+        margin-bottom: 100px;
+    }
+
+    .khoangtrangRis {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        font-size: 20px;
+    }
+</style>
+<div class="contant">
+
+
+    <div class="container">
+
+        <div class="contact-us">
+            <!--EVENT START-->
+            <div class="row">
+
+                <div class="span12">
+
+                    <div class="leave-reply">
+
+
+                        <div style="height:20px"></div>
+                        <div class="khoangtrang"></div>
+                        @using (Html.BeginForm("LoginForAccount", "ContactUs", FormMethod.Post))
+                        {
+
+                            <form autocomplete="off" method="post" action="#">
+                                <table style="width:300px;margin-left: 358px;">
+                                    <tr>
+
+                                        <td>
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true, " ",new { Styles="color:red" })
+                                        </td>
+                                    </tr>
+                                    <tr><td>UserName</td></tr>
+                                    <tr>
+
+                                        <!--<td><input type="text" name="name" value="" placeholder="Name" class="input-block-level" ></td>-->
+                                        <td>@Html.TextBoxFor(model => model.username, new { placeholder = "Username" })</td>
+
+                                    </tr>
+                                    <tr><td>PassWord</td></tr>
+                                    <tr>
+
+                                        <!--  <td><input type="text" name="name" value="" placeholder="Name" class="input-block-level"></td>-->
+                                        <td>@Html.PasswordFor(model => model.password, new { placeholder = "Password" })</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><button name="submit" class="btn btn-success" style="margin-right:10px">Submit</button><a href="~/ContactUs/LoginFacebook" class="btn1 login-btn"><i class="fa fa-facebook">Login with Facebook</i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="@Url.Action("Index","ForgotPassword")">Forgot password?</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="@Url.Action("Index", "Register")">Register New Account</a></td>
+
+                                    </tr>
+                                </table>
+                            </form>
+                            <div class="khoangtrang"></div>
+                        }
+                        <div style="height:20px"></div>
+                    </div>
+
+                </div>
+            </div>
+            <!--EVENT END-->
+
+        </div>
+    </div>
+</div>

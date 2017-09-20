@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyLayoutPage.cshtml";
+
+}
+
+@model DoAnHK3_4.ViewModels.AccountChange
+@using BotDetect.Web.Mvc;
+
+
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
+      rel="stylesheet" type="text/css" />
+<style>
+    td.old {
+        padding-left: 10px;
+    }
+
+    .khoangtrang {
+        margin-bottom: 100px;
+    }
+
+    .khoangtrangRis {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        font-size: 20px;
+    }
+</style>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+
+            @using (Html.BeginForm("ChangeAccount", "ChangePassword", FormMethod.Post))
+            {
+
+                <table style="width:400px;margin-left: 358px;">
+                    <tr>
+                        <td><div class="khoangtrangRis">ChangePassWork</div></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="old">
+                            Old Password
+                        </td>
+                        <td>
+                            @Html.PasswordFor(model => model.oldPasswork, new { placeholder = "Enter Old Passwork", @class = "input-block-level" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="old"> New Password</td>
+                        <td>
+                            @Html.PasswordFor(model => model.newPasswork, new { placeholder = "Enter New Passwork", @class = "input-block-level" })
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="old"> Config Password</td>
+                        <td>
+                            @Html.PasswordFor(model => model.confirmPasswork, new { placeholder = "Enter Confirm Passwork", @class = "input-block-level" })
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        @{ MvcCaptcha exampleCaptcha = new MvcCaptcha("ExampleCaptcha"); }
+                        <td></td>
+                        <td>
+                            @Html.Captcha(exampleCaptcha)
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Html.TextBox("CaptchaCode", null, new { placeholder = "Enter CaptCha", @class = "input-block-level" })</td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" class="btn btn-info" value="submit" /></td>
+                    </tr>
+                </table>
+
+                            <!-- end form-->
+                            }
+        </div>
+        <div class="khoangtrang"></div>
+    </div>
+</div>
+<div class="col-md-4"></div>

@@ -1,0 +1,162 @@
+﻿@model DoAnHK3_4.Models.Account
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_MyAdminLayoutPage.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <div class="panel-heading"> Details Account</div>
+            <div class="panel-wrapper collapse in" aria-expanded="true">
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-body">
+                            <h3 class="box-title">Account Info</h3>
+                            <hr class="m-t-0 m-b-40">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@Html.DisplayNameFor(model => model.username)</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> @Html.DisplayFor(model => model.username) </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@Html.DisplayNameFor(model => model.password)</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> @Html.DisplayFor(model => model.password) </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@Html.DisplayNameFor(model => model.question)</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> @Html.DisplayFor(model => model.question) </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@Html.DisplayNameFor(model => model.answer)</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> @Html.DisplayFor(model => model.answer) </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@Html.DisplayNameFor(model => model.roldId)</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> @Html.DisplayFor(model => model.roldId) </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">@Html.DisplayNameFor(model => model.facebook)</label>
+                                        <div class="col-md-9">
+                                            <p class="form-control-static"> @Html.DisplayFor(model => model.facebook) </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <!--/span-->
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <h3 class="box-title">Personal Info</h3>
+                        <hr class="m-t-0 m-b-40">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">@Html.DisplayNameFor(model => model.firstName)</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> @Html.DisplayFor(model => model.firstName) </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">@Html.DisplayNameFor(model => model.lastName)</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> @Html.DisplayFor(model => model.lastName) </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">@Html.DisplayNameFor(model => model.gender)</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> @Html.DisplayFor(model => model.gender) </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">@Html.DisplayNameFor(model => model.country)</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> @Html.DisplayFor(model => model.country) </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">@Html.DisplayNameFor(model => model.address)</label>
+                                    <div class="col-md-9">
+                                        <p class="form-control-static"> @Html.DisplayFor(model => model.address) </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <!--/span-->
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            @*<a  href="@Url.Action("Edit", "Accounts", new { id = Model.id })"><i class="fa fa-pencil"></i>Edit</a>*@
+                                            <button type="submit" class="btn btn-info" name="action:Edit" formaction="@Url.Action("Edit", "Accounts", new { id = Model.id })"><i class="fa fa-pencil"></i>Edit</button>
+                                            @*<button type="submit" class="btn btn-info"> <i class="fa fa-pencil"></i> Edit</button>*@
+                                            <a class="btn btn-default" href="@Url.Action("Index", "Accounts")">Cancel</a>
+
+                                            @*<button type="button" class="btn btn-default">Cancel</button>*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6"> </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "CheckLogin";
+    Layout = "~/Views/Shared/_MyLayoutPage.cshtml";
+}
+
+<div class="page-heading">
+    <div class="container">
+        <h2>Send Greeting Card</h2>
+        <p>Send Card to Recipients</p>
+    </div>
+</div>
+
+<div class="contant">
+    <div class="container">
+        <div class="row">
+            <div class="span2"></div>
+            <div class="span8">
+                <div id="change_theme_response">
+                    <div class="form-box" style="border:none;">
+                        <div class="form-body" style="min-height:250px;box-shadow:none;">
+                            <!-- MAILER PREVIEW START -->
+                            <form onsubmit="return validate();" id="frmSendCard" name="frmSendCard" autocomplete="off" method="Post" action="SendMail.php">
+
+                                <div class="header">
+                                    <div class="logo">
+                                        <img src="https://egreetings.gov.in/images/emb-egreet.png" alt="eGreeting Logo">
+                                    </div>
+                                    <div class="cart" style="margin-top:20px;color:#1967a7;">
+                                        <h3>eGreetings Portal</h3>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    @{ var session = (DoAnHK3_4.Common.CardCommon)Session[DoAnHK3_4.Common.CommonConstants.CARD_SESSION];}
+                                    @if (session.video == null)
+                                    {
+                                        <img src="@Url.Content("~/Content/")uploadedgreeting/@session.photo" alt="eGreeting Card Preview" style="width:710px;height:450px">
+                                    }
+                                    else
+                                    {
+                                        <video width="710" controls>
+                                            <source src="@Url.Content("~/Content/")uploadedgreeting/Video/@session.video" type="video/webm" />
+                                        </video>
+                                    }
+                                    
+                                </div>
+                                <div style="background:#f1f1f1;color:#1967a7;border-radius:5px;">
+                                    <h3 style="text-align:center;"><strong>Dear  {Recipient Name},</strong></h3>
+                                </div>
+                                <div style="color:#f1f1f1;background:#1967a7;border-radius:5px;padding: 20px; font-size: 16px;">
+                                    <p style="text-align:center;"><strong>Hahahaha</strong></p>
+                                </div>
+                                <div style="background:#f1f1f1;color:#1967a7;border-radius:5px;">
+                                    <h3 style="text-align:center;">
+                                        <strong>{SenderName}</strong> 
+                                    </h3>
+                                </div>
+                                <div class="header">
+                                    <h4 align="center"><i><strong>You must be a registered user of Service before sending eGreetings.<a href="@Url.Action("Index", "ContactUs")">Click here</a> to Sign In</strong></i></h4>
+                                </div>
+
+                                <!-- MAILER PREVIEW END -->
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

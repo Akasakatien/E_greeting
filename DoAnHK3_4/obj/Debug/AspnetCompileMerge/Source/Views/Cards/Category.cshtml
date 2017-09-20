@@ -1,0 +1,113 @@
+﻿@using DoAnHK3_4.Repository
+@{
+     ICategoryRepository iCategoryRepository = new CategoryRepository();
+}
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyLayoutPage.cshtml";
+}
+
+
+<!--BANNER START-->
+<div class="page-heading">
+    <div class="container">
+        <h2>Greeting Cards</h2>
+        <p>Greeting Cards</p>
+    </div>
+</div>
+<!--BANNER END-->
+<!--CONTANT START-->
+<div class="contant">
+    <div class="container">
+        <div class="row">
+            <div class="span9">
+                <div class="featured-courses">
+                    <h2>@ViewBag.category.name</h2>
+                    <div class="row" id="load_m">
+
+                        <div class="responsive-tabs">
+                            <div>
+                                @foreach (var card in ViewBag.greetings)
+                                {
+                                    <div class="span3" style="display: none;">
+                                        <div class="course">
+                                            <div class="thumb tooltip_card">
+                                                <a href="@Url.Action("Personalize", "Cards", new {
+                                                        id = card.id })"><img alt="fday_16_13.jpg" 
+                                                                src="@Url.Content("~/content/")uploadedgreeting/@card.photo" style="height:200px;width:270px;"></a>
+                                                <span class="tooltiptext_card">Fathers Day</span>
+                                                <input type="hidden" id="cat_id" value="88">
+                                            </div>
+                                            <div class="course-detail-btn">
+                                                <a class="modal_trigger" href="#modal" alt="Share on Facebook" onclick="setCardId('1173')">Share </a>
+
+                                                <a href="@Url.Action("Personalize", "Cards", new {id = card.id })">Send</a>
+                                            </div>
+                                            <div class="course-detail-btn">
+
+                                                <!--<div class="total_votes"><p class="voted"> Rating: <strong>4</strong>/5 (68  vote(s) cast) </div>-->
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                }
+                                
+                                <div class="pagination">
+                                    <div class="btn-style" id="more1168" style="cursor:pointer;width:100%;">
+                                        <p class="more" align="center" id="1168">Load More... </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="span3">
+                <!--SIDEBAR START-->
+                <div class="sidebar">
+                    <!--COURSE CATEGORIES WIDGET START-->
+                    <div class="widget widget-course-categories">
+                        <div class="faq">
+                            <h2>Greeting Category</h2>
+                            @foreach (var category in iCategoryRepository.findAll())
+                            {
+                                <!--ACORDIAN DATE START-->
+                                <div class="accordion_cp" id="section2">
+                                    <p>@category.name</p><span><i class="fa fa-minus"></i></span>
+                                </div>
+                                <div class="contain_cp_accor">
+                                    @foreach (var categoryDetail in iCategoryRepository.findAllCategoryDetail())
+                                    {
+                                        if (categoryDetail.categoryID == category.id)
+                                        {
+                                            <div class="content_cp_accor">
+                                                <p><a href="@Url.Action("Category", "Cards", new { id = categoryDetail.id })">@categoryDetail.name</a></p>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            <!--ACORDIAN DATE END-->
+                            }
+                        </div>
+
+                    </div>
+                    <!--COURSE CATEGORIES WIDGET END-->
+
+                </div>
+                <!--SIDEBAR END-->
+            </div>
+
+        </div>
+    </div>
+    <!--LATEST COURSES SECTION END-->
+    <section>      
+         <div style="height:15px;"></div>
+    </section>
+
+
+</div>
+<!--CONTANT END-->
+
+<!--<script type="text/javascript" src="@Url.Content("~/content/")js/jquery-3.1.0.min.js"></script>-->

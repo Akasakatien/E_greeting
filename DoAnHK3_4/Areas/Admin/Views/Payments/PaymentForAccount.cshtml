@@ -1,0 +1,80 @@
+﻿@model IEnumerable<DoAnHK3_4.Models.Payment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_MyAdminLayoutPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <h1>List of Payment</h1>
+            <div class="table-responsive">
+                <table id="myTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.accountId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.serviceId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.amount)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.expiryDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.paymentNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Status)
+                            </th>
+
+                            <th>Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.accountId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.serviceId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.amount)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.expiryDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.paymentNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Status)
+                                </td>
+                                <td>
+                               
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+
+
+</script>

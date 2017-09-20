@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyLayoutPage.cshtml";
+    var listQuestion = new List<SelectListItem>()
+    {
+        new SelectListItem{Text="Where did you speed your childhood summers?",Value="Where did you speed your childhood summers?"},
+        new SelectListItem{Text="What was the last name of your favorite teacher?",Value="What was the last name of your favorite teacher?"},
+        new SelectListItem{Text="What was your favorite food as a child?",Value="What was your favorite food as a child?"},
+        new SelectListItem{Text="trong có đẹp trai khong ?",Value="trong có đẹp trai khong ?"},
+    };
+}
+
+@model DoAnHK3_4.ViewModels.AccountForgot
+
+<style>
+    td.old {
+        padding-left: 10px;
+    }
+
+    .khoangtrang {
+        margin-bottom: 100px;
+    }
+
+    .khoangtrangRis {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        font-size: 20px;
+    }
+</style>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+
+            @using (Html.BeginForm("ForgotAccount", "ForgotPassword", FormMethod.Post))
+            {
+
+                <table style="width:400px;margin-left: 358px;">
+                    <tr>
+                        <td><div class="khoangtrangRis">Register</div></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(false, "", new {  @class = "text-danger" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="old">UserName</td>
+                        <!--<td><input type="text" name="name" value="" placeholder="Name" class="input-block-level" ></td>-->
+                        <td>@Html.TextBoxFor(model => model.username, new { placeholder = "Username", @class = "input-block-level", @id = "username" })</td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="old">Question</td>
+                        <td>
+                            @Html.DropDownListFor(model => model.Question, listQuestion)
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="old">Answer</td>
+                        <td>
+                            @Html.TextBoxFor(model => model.Answer, new { name = "Answer", value = "", placeholder = "Enter Answer", @class = "input-block-level" })
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="submit" class="btn btn-info" value="submit" /></td>
+                    </tr>
+                </table>
+
+                            <!-- end form-->
+            }
+        </div>
+        <div class="khoangtrang"></div>
+    </div>
+</div>
+<div class="col-md-4"></div>
+

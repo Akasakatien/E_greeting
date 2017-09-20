@@ -1,0 +1,239 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MyLayoutPage.cshtml";
+    var listQuestion = new List<SelectListItem>()
+    {
+        new SelectListItem{Text="Where did you speed your childhood summers?",Value="Where did you speed your childhood summers?"},
+        new SelectListItem{Text="What was the last name of your favorite teacher?",Value="What was the last name of your favorite teacher?"},
+         new SelectListItem{Text="What was your favorite food as a child?",Value="What was your favorite food as a child?"},
+          new SelectListItem{Text="trong có đẹp trai khong ?",Value="trong có đẹp trai khong ?"},
+    };
+    var list = new List<SelectListItem>(){
+new SelectListItem{Text="An Giang",Value="An Giang"},
+new SelectListItem{Text="Bà Rịa - Vũng Tàu",Value="Bà Rịa - Vũng Tàu"},
+new SelectListItem{Text="Bắc Giang",Value="Bắc Giang"},
+new SelectListItem{Text="Bắc Kạn",Value="Bắc Kạn"},
+new SelectListItem{Text="Bạc Liêu",Value="Bạc Liêu"},
+new SelectListItem{Text="Bắc Ninh",Value="Bắc Ninh"},
+new SelectListItem{Text="Bến Tre",Value="Bến Tre"},
+new SelectListItem{Text="Bình Định",Value="Bình Định"},
+new SelectListItem{Text="Bình Dương",Value="Bình Dương"},
+new SelectListItem{Text="Bình Phước",Value="Bình Phước"},
+new SelectListItem{Text="Bình Thuận",Value="Bình Thuận"},
+new SelectListItem{Text="Cà Mau",Value="Cà Mau"},
+new SelectListItem{Text="Cao Bằng",Value="Cao Bằng"},
+new SelectListItem{Text="Đắk Lắk",Value="Đắk Lắk"},
+new SelectListItem{Text="Đắk Nông",Value="Đắk Nông"},
+new SelectListItem{Text="Điện Biên",Value="Điện Biên"},
+new SelectListItem{Text="Đồng Nai",Value="Đồng Nai"},
+new SelectListItem{Text="Đồng Tháp",Value="Đồng Tháp"},
+new SelectListItem{Text="Gia Lai",Value="Gia Lai"},
+new SelectListItem{Text="Hà Giang",Value="Hà Giang"},
+new SelectListItem{Text="Hà Tĩnh",Value="Hà Tĩnh"},
+new SelectListItem{Text="Hải Dương",Value="Hải Dương"},
+new SelectListItem{Text="Hậu Giang",Value="Hậu Giang"},
+new SelectListItem{Text="Hòa Bình",Value="Hòa Bình"},
+new SelectListItem{Text="Hưng Yên",Value="Hưng Yên"},
+new SelectListItem{Text="Khánh Hòa",Value="Khánh Hòa"},
+new SelectListItem{Text="Kiên Giang",Value="Kiên Giang"},
+new SelectListItem{Text="Kon Tum",Value="Kon Tum"},
+new SelectListItem{Text="Lai Châu",Value="Lai Châu"},
+new SelectListItem{Text="Lâm Đồng",Value="Lâm Đồng"},
+new SelectListItem{Text="Lạng Sơn",Value="Lạng Sơn"},
+new SelectListItem{Text="Lào Cai",Value="Lào Cai"},
+new SelectListItem{Text="Long An",Value="Long An"},
+new SelectListItem{Text="Nam Định",Value="Nam Định"},
+new SelectListItem{Text="Nghệ An",Value="Nghệ An"},
+new SelectListItem{Text="Ninh Bình",Value="Ninh Bình"},
+new SelectListItem{Text="Ninh Thuận",Value="Ninh Thuận"},
+new SelectListItem{Text="Phú Thọ",Value="Phú Thọ"},
+new SelectListItem{Text="Quảng Bình",Value="Quảng Bình"},
+new SelectListItem{Text="Quảng Ngãi",Value="Quảng Ngãi"},
+new SelectListItem{Text="Quảng Ninh",Value="Quảng Ninh"},
+new SelectListItem{Text="Quảng Trị",Value="Quảng Trị"},
+new SelectListItem{Text="Sóc Trăng",Value="Sóc Trăng"},
+new SelectListItem{Text="Sơn La",Value="Sơn La"},
+new SelectListItem{Text="Tây Ninh",Value="Tây Ninh"},
+new SelectListItem{Text="Thái Bình",Value="Thái Bình"},
+new SelectListItem{Text="Thái Nguyên",Value="Thái Nguyên"},
+new SelectListItem{Text="Thanh Hóa",Value="Thanh Hóa"},
+new SelectListItem{Text="Thừa Thiên Huế",Value="Thừa Thiên Huế"},
+new SelectListItem{Text="Tiền Giang",Value="Tiền Giang"},
+new SelectListItem{Text="Trà Vinh",Value="Trà Vinh"},
+new SelectListItem{Text="Tuyên Quang",Value="Tuyên Quang"},
+new SelectListItem{Text="Vĩnh Long",Value="Vĩnh Long"},
+new SelectListItem{Text="Vĩnh Phúc",Value="Vĩnh Phúc"},
+new SelectListItem{Text="Yên Bái",Value="Yên Bái"},
+new SelectListItem{Text="Phú Yên",Value="Phú Yên"},
+new SelectListItem{Text="Đà Nẵng",Value="Đà Nẵng"},
+new SelectListItem{Text="Hải Phòng",Value="Hải Phòng"},
+new SelectListItem{Text="Hà Nội",Value="Hà Nội"},
+new SelectListItem{Text="TP HCM",Value="TP HCM"},
+new SelectListItem{Text="Hà Nam",Value="Hà Nam"},
+new SelectListItem{Text="Cần Thơ",Value="Cần Thơ"},
+new SelectListItem{Text="Quảng Nam",Value="Quảng Nam"},
+                 };
+    var listGender = new List<SelectListItem>()
+    {
+        new SelectListItem{Text="Male",Value="Male"},
+        new SelectListItem{Text="Female",Value="Female"},
+         new SelectListItem{Text="Other",Value="Other"},
+    };
+}
+
+@model DoAnHK3_4.Models.Account
+@using BotDetect.Web.Mvc;
+
+
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
+      rel="stylesheet" type="text/css" />
+<style>
+    td.old {
+        padding-left: 10px;
+    }
+
+    .khoangtrang {
+        margin-bottom: 100px;
+    }
+
+    .khoangtrangRis {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        font-size: 20px;
+    }
+</style>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+
+            @using (Html.BeginForm("AddAccount", "Register", FormMethod.Post))
+            {
+
+                <table style="width:400px;margin-left: 358px;">
+                    <tr>
+                        <td><div class="khoangtrangRis">Register</div></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="color:red">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="old">
+                            Username
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.username, new { required = "required", name = "email", placeholder = "Enter E-mail", @class = "input-block-level" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="old"> Password</td>
+                        <td>
+                            @Html.PasswordFor(model => model.password, new { placeholder = "Enter Password", @class = "input-block-level" })
+
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="old"> Question</td>
+                        <td>
+                            @Html.DropDownListFor(model => model.question, listQuestion)
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="old"> Answer</td>
+                        <td>
+                            @Html.TextBoxFor(model => model.answer, new { name = "Answer", value = "", placeholder = "Enter Answer", @class = "input-block-level" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><div class="khoangtrangRis">Infomation</div></td>
+                    </tr>
+                    <tr>
+                        <td class="old">
+                            FirstName
+                        </td>
+                        <td>
+
+                            @Html.TextBoxFor(model => model.firstName, new { required = "required", name = "firstName", placeholder = "Enter firstName", @class = "input-block-level" })
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="old"> LastName</td>
+                        <td>
+                            @Html.TextBoxFor(model => model.lastName, new { required = "required", name = "lastName", placeholder = "Enter lastName", @class = "input-block-level" })
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td class="old"> Address</td>
+                        <td>
+                            @Html.TextBoxFor(model => model.address, new { required = "required", name = "address", placeholder = "Enter address", @class = "input-block-level" })
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td class="old"> Mobile</td>
+                        <td>
+                            @Html.TextBoxFor(model => model.mobile, new { placeholder = "Enter mobile" })
+
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="old">Gender</td>
+                        <td>@Html.DropDownListFor(model => model.gender, listGender)</td>
+                    </tr>
+                    <tr>
+                        <td class="old"> Country</td>
+                        <td>
+                            @Html.DropDownListFor(model => model.country, list)
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+                        @{ MvcCaptcha exampleCaptcha = new MvcCaptcha("ExampleCaptcha"); }
+                        <td></td>
+                        <td>
+                            @Html.Captcha(exampleCaptcha)
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>@Html.TextBox("CaptchaCode", null, new { placeholder = "Enter CaptCha", @class = "input-block-level" })</td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" class="btn btn-info" value="submit" /></td>
+                    </tr>
+                </table>
+
+                            <!-- end form-->
+                            }
+        </div>
+        <div class="khoangtrang"></div>
+    </div>
+</div>
+<div class="col-md-4"></div>
+<!-- end col 3-->
+<!-- BOOTSTRAP STYLES-->

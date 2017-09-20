@@ -1,0 +1,80 @@
+﻿@model IEnumerable<DoAnHK3_4.Models.Sending>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_MyAdminLayoutPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <h1>List of Sending</h1>
+            <div class="table-responsive">
+                <table id="myTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.greetingId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.AccountId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.senderName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.rersiveName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.addressTo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.customMessenger)
+                            </th>
+
+                            <th>Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.greetingId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AccountId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.senderName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.rersiveName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.addressTo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.customMessenger)
+                                </td>
+                                <td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+
+
+</script>

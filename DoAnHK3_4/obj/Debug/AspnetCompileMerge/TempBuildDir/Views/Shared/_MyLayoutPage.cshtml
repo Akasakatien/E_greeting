@@ -1,0 +1,486 @@
+﻿
+<!doctype html>
+<html>
+
+<!-- Mirrored from egreetings.gov.in/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Jun 2017 01:32:27 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta property="og:type" content="article">
+    <meta name="description" content="eGreetings portal to send greetings card online">
+    <meta name="keywords" content="eGreetings,egreetings,greetings,online, greeting card,online card,greeting card,egreeting portal, send online card, festival greeting,">
+    <title>eGreetings Portal</title>
+    @RenderSection("head", false)
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CUSTOM CSS -->
+    <link href="@Url.Content("~/content/")css/style.css" rel="stylesheet" media="screen">
+    <link href="@Url.Content("~/content/")css/color1.css" rel="stylesheet" media="screen">
+    <link href="@Url.Content("~/content/")css/transitions.css" rel="stylesheet" media="screen">
+    <link href="@Url.Content("~/content/")css/subscribe.css" rel="stylesheet" media="screen">
+    <link href="@Url.Content("~/content/")css/event_cal.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="@Url.Content("~/content/")css/font-wolv.css">
+    <!-- BOOTSTRAP -->
+    <link href="@Url.Content("~/content/")css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="@Url.Content("~/content/")css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+    <!-- BX SLIDER-->
+    <link href="@Url.Content("~/content/")css/jquery.bxslider.css" rel="stylesheet" media="screen">
+    <!-- OWL CAROUSEL -->
+    <link href="@Url.Content("~/content/")css/owl.carousel.css" rel="stylesheet">
+    <!-- FONT AWESOME -->
+    <link href="@Url.Content("~/content/")css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <!-- PRETTY PHOTO BACKGROUNDS -->
+    <link href="@Url.Content("~/content/")css/prettyPhoto.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" media="all" href="@Url.Content("~/content/")css/motioncss.css">
+    <link rel="stylesheet" type="text/css" media="all" href="@Url.Content("~/content/")css/animation.css">
+    <script src="@Url.Content("~/content/")js/jquery.min.js"></script>
+    <script src="@Url.Content("~/content/")js/jquery-subscribe.js"></script>
+    <script>
+$(document).ready(function(){
+    $('.decrease-me').tooltip({title: "<span style='font-size:8px;'><strong>AAA</strong></span>", html: true, placement: "bottom"});
+    $('.reset-me').tooltip({title: "<strong>AAA</strong>", html: true, placement: "bottom"});
+    $('.increase-me').tooltip({title: "<h3><strong>AAA</strong></h3>", html: true, placement: "bottom"});
+});
+    </script>
+
+
+    <script type="text/javascript">
+$(document).ready(function()
+{
+$("#notificationLink").click(function()
+{
+$("#notificationContainer").fadeToggle(300);
+$("#notification_count").fadeOut("slow");
+return false;
+});
+
+//Document Click
+$(document).click(function()
+{
+$("#notificationContainer").hide();
+});
+//Popup Click
+$("#notificationContainer").click(function()
+{
+return false
+});
+
+});
+    </script>
+    <style>
+        #nav {
+            list-style: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+            #nav li {
+                float: left;
+                margin-right: 48px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+                #nav li a {
+                    color: #333333;
+                    text-decoration: none;
+                }
+
+                    #nav li a:hover {
+                        color: #006699;
+                        text-decoration: none;
+                    }
+
+        #notification_li {
+            position: relative;
+        }
+
+        #notificationContainer {
+            background-color: #fff;
+            border: 1px solid rgba(100, 100, 100, .4);
+            -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+            overflow: visible;
+            position: absolute;
+            top: 30px;
+            margin-left: -170px;
+            width: 400px;
+            z-index: 1;
+            display: none;
+        }
+
+            #notificationContainer:before {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 0;
+                height: 0;
+                color: transparent;
+                border: 10px solid black;
+                border-color: transparent transparent black;
+                margin-top: -20px;
+                margin-left: 188px;
+            }
+
+        #notificationTitle {
+            z-index: 1000;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 13px;
+            background-color: #ffffff;
+            width: 384px;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        #notificationsBody {
+            padding: 33px 0px 0px 0px !important;
+            min-height: 300px;
+        }
+
+        #notificationFooter {
+            background-color: #e9eaed;
+            text-align: center;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 12px;
+            border-top: 1px solid #dddddd;
+        }
+
+        #notification_count {
+            padding: 0px 7px 0px 7px;
+            background: #cc0000;
+            color: #ffffff;
+            font-weight: bold;
+            margin-left: 20px;
+            border-radius: 9px;
+            position: absolute;
+            margin-top: -11px;
+            font-size: 11px;
+        }
+    </style>
+    <!-- start, code added on 27th jan 16  -->
+    <script src="@Url.Content("~/content/")autocomplete/jquery-1.10.2.js"></script>
+    <script src="@Url.Content("~/content/")autocomplete/jquery-ui.js"></script>
+    <!-- end, code added on 27th jan 16  -->
+    <!--code added on 29th 16-->
+    <script type="text/javascript" src="@Url.Content("~/content/")js/jquery-ui-1.8.2.custom.min.js"></script>
+    <link href="@Url.Content("~/content/")@Url.Content("~/content/")css/css.css" rel="stylesheet" type="text/css" />
+    <!-- end here -->
+
+
+</head>
+<body>
+    <!--WRAPPER START-->
+    <div id="buttons" class="wrapper">
+        <!--HEADER START-->
+
+        <header>
+            <!--TOP STRIP START-->
+            <div class="top-strip">
+                <div class="container">
+
+                    <!--ACCOUNT SECTION START-->
+                    @ViewBag.demo
+                    @{var session = (DoAnHK3_4.Common.UserCommon)Session[DoAnHK3_4.Common.CommonConstants.USER_SESSION];}
+
+                    <div class="account">
+                        <ul>
+                            <li><a href="@Url.Action("Index","ContactUs")" style="font-size:initial;">Subscribe</a></li>
+                            @if (session != null)
+                            {
+
+                                <li class="dropdown">
+                                    <button class=" dropdown-toggle" type="button" data-toggle="dropdown">
+                                        My Account
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        @if (session.FaceBook == true)
+                                        {
+                                            <li><a>@session.FullName</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="@Url.Action("Index","InfoAccount",new { username= session.UserName })">@session.FullName</a></li>
+                                        }
+
+                                        @if (session.Payment != true)
+                                        {
+                                            <li><a href="@Url.Action("Index", "RegisterRembership")">ChooserMemberShip</a></li>
+                                        }
+                                        @if (session.FaceBook == false)
+                                        {
+                                            <li><a href="@Url.Action("Index","IsChangeAccount")">Change Passwork</a></li>
+                                        }
+                                        <li><a href="~/ContactUs/Logout">Log-out</a></li>
+                                    </ul>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li><a href="@Url.Action("Index","ContactUs")">Sign In</a></li>
+                                <li><a href="@Url.Action("Index","Register")">Register</a></li>
+                            }
+
+                            <li>
+
+
+                                <div id="font-setting-buttons">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default decrease-me"><strong>A-</strong></button>
+                                        <button type="button" class="btn btn-default reset-me"><strong>A</strong></button>
+                                        <button type="button" class="btn btn-default increase-me"><strong>A+</strong></button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--ACCOUNT SECTION START-->
+            </div>
+    </div>
+    <!--TOP STRIP END-->
+    <!--NAVIGATION START-->
+    <div class="navigation-bar">
+        <div class="container">
+            <div class="logo">
+                <a href="@Url.Action("Index","Home")"><img src="@Url.Content("~/content/")images/emb-egreet.png" alt="eGreeting Logo"></a>
+            </div>
+
+
+
+            <form method="post" action="https://egreetings.gov.in/search.php">
+
+                <div class="cart">
+                    <ul>
+                        <li>
+                            <div class="search-bar"><i class="fa fa-search"></i></div>
+                            <div class="search-box">
+
+                                <input type="hidden" name="csrf_token_index" value="42282716303505905790228463834630" />
+
+                                <script type="text/javascript">
+
+
+$(function() {
+
+$("#dd_user_input").autocomplete({
+source: "global_search.php?cityId=28",
+minLength: 0,
+select: function(event, ui) {
+var getUrl = ui.item.id;
+if(getUrl != '#') {
+location.href = getUrl;
+}
+},
+
+html: true,
+
+open: function(event, ui) {
+$(".ui-autocomplete").css("z-index", 1000);
+}
+});
+
+});
+                                </script>
+
+
+
+                                <input id="dd_user_input" type="text" class="input-block-level search" onblur="if(this.value=='')this.value=this.defaultValue;" onfocus="if(this.value==this.defaultValue)this.value='';" value="Type your Input Here" autocomplete="off" spellcheck="false" />
+
+
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </form>
+
+            <div class="navigation">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div class="nav-collapse collapse">
+                                <ul>
+                                    <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                                    <li><a href="@Url.Action("Index","AboutUs")">About Us</a></li>
+                                    <li><a href="@Url.Action("Index", "Cards")">Cards</a></li>
+                                    @if (session == null)
+                                    {
+                                        <li><a href="@Url.Action("Index", "ContactUs")">Log-in</a></li>
+                                    }
+
+                                    <!--<li><input id="autocomplete" style="margin-top:30px;" /></li>-->
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--NAVIGATION END-->
+    </header>
+    <!--HEADER END-->
+    <!-- <div class="subscribe-me">
+        <h2>Subscribe our Newsletter</h2>
+        <a href="#close" class="sb-close-btn">x</a>
+        <p>Subscribe to our mailing list to get updates to your email inbox</p>
+        <form>
+            <input type="email" placeholder="Email Address">
+            <input type="submit" value="Submit">
+        </form>
+    </div> -->
+    <!--BANNER START-->
+    @RenderBody()
+    <!--CONTANT END-->
+
+
+    <script>
+    function fbshareCurrentPage(m)
+    {
+
+                var url = "personalize-cardeec7.html?g_id=" + m;
+		//var url = "https://egreetings.india.gov.in/userinterface/GreetingCard/ViewGreeting.php";
+                window.open("https://www.facebook.com/sharer/sharer.php?u="+escape( url )+"&t="+document.title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false; }
+
+function tweetCurrentPage(n)
+{
+var url = "personalize-cardeec7.html?g_id=" + n;
+ window.open("https://twitter.com/share?url="+escape(url)+"&text="+document.title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false; }
+
+
+function googleCurrentPage( card_id )
+{
+	var n = card_id;
+
+	var url = "personalize-cardeec7.html?g_id=" + n;
+
+	window.open("https://plus.google.com/share?url="+escape(url)+"&text="+document.title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;
+
+ }
+
+    </script>
+    <!--FOOTER START-->
+    <footer>
+        <div class="container">
+            <div class="row">
+
+            </div>
+        </div>
+        <div class="copyright">
+
+            @*<div class="row-fluid">
+
+                    <div class="span2">
+                        <a target="_blank" href="http://nkn.in/"><img style="width:75px;" src="@Url.Content("~/content/")images/nknlogo.png" /></a>
+                    </div>
+                    <div class="span2">
+                        <a target="_blank" href="http://pmindia.gov.in/en/"><img style="width:100px;" src="@Url.Content("~/content/")images/pm-india-logo.png" /></a>
+                    </div>
+                    <div class="span2">
+                        <a target="_blank" href="http://india.gov.in/"><img style="width:75px;" src="@Url.Content("~/content/")images/india-gov-logo.png" /></a>
+                    </div>
+                    <div class="span2">
+                        <a target="_blank" href="http://meity.gov.in/"><img src="@Url.Content("~/content/")images/Meity-logo.png" /></a>
+                    </div>
+                    <div class="span2">
+                        <a target="_blank" href="https://sampark.gov.in/"><img style="width:100px;" src="@Url.Content("~/content/")images/sampark_logo-new1.png" /></a>
+                    </div>
+                    <div class="span2">
+                        &nbsp;
+                    </div>
+
+                </div>*@
+
+
+
+
+            <div class="footer_links">
+                <a href="privacy-policy.html" style="color:#f00;">Privacy Policy</a> | <a href="terms.html" style="color:#f00;">Terms &amp; Conditions</a> | <a href="sitemap.html" style="color:#f00;">Sitemap</a> | <a href="contact_us.html" style="color:#f00;">Contact Us</a>
+
+
+                <p class="copy-color">© Designed, developed and hosted by <a href="http://www.nic.in/" target="_blank" style="color:#f00;">National Informatics Centre</a><br />Ministry of Electronics & Information Technology<br /> Government of India.</p>
+
+
+
+            </div>
+            @*<div class="container">
+                    <form name="subscribe" autocomplete="off" method="post" id="subscribe" action="#sub_email" style="float:right;width:300px;">
+
+                        <div class="color" style="float:left;color:#f00;">Subscribe here for Newsletter</div>
+                        <input type="email" name="sub_email" id="sub_email" placeholder="Enter your E-mail ID" class="input-block-level" required>
+                        <button class="btn-style" name="subscribe" style="float:left;">Subscribe</button>
+
+                        <span style="float:left;clear:both;color:white;margin-top:5px;">Last Updated On   : May 11, 2017</span>
+
+                    </form>
+                </div>*@
+        </div>
+    </footer>
+    <!--FOOTER END-->
+    <!--WRAPPER END-->
+    <!-- Jquery Lib -->
+    <script>
+$(document).ready(function(e) {
+
+    setTimeout(function() {
+        $("#sub_msg").fadeOut(1500);
+    }, 3000);
+});
+    </script>
+    <!--<script src="@Url.Content("~/content/")js/jquery-1.11.0.min.js"></script>-->
+    <script src="@Url.Content("~/content/")js/bootstrap.min.js"></script>
+    <script src="@Url.Content("~/content/")js/jquery.bxslider.min.js"></script>
+    <script src="@Url.Content("~/content/")js/owl.carousel.js"></script>
+    <script src="@Url.Content("~/content/")js/modernizr.js"></script>
+    <script src="@Url.Content("~/content/")js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/")js/skrollr.min.js"></script>
+    <script src="@Url.Content("~/content/")js/functions.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/")js/jquery.accordion.js"></script>
+    <!-- below js added on 13feb 2015 -->
+    <script type="text/javascript" src="@Url.Content("~/content/")js/jquery.isotope.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/")js/plugins.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/")js/waypoints.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/")js/signup.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/")js/popupoverlay.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/")js/tabs.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/")js/DateTimePicker.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/")js/event-cal.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/content/")js/bootstrap-colorpicker.js"></script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/content/")js/jquery.dataTables.js"></script><!-- line added on 21st apr 16 -->
+    <script type="text/javascript" src="@Url.Content("~/content/")js/jquery.theme-change.js"></script>
+    <script src="@Url.Content("~/content/")js/script.js"></script>
+    
+
+    <!-- start, code added  on 22nd apr 16  -->
+
+    <script src="@Url.Content("~/content/")js/EasyView.js"></script>
+    <script>
+        $(function(){
+
+                /* Custom buttons */
+                $('#font-setting-buttons').easyView({
+                        container: '#buttons',
+                        increaseSelector: '.increase-me',
+                        decreaseSelector: '.decrease-me',
+                        normalSelector: '.reset-me',
+                        contrastSelector: '.change-me'
+                });
+
+        });
+    </script>
+
+    <!-- end, code on 22nd apr 16  -->
+
+</body>
+
+<!-- Mirrored from egreetings.gov.in/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 08 Jun 2017 01:33:46 GMT -->
+</html>

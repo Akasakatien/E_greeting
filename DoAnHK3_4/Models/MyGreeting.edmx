@@ -1,0 +1,562 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GreetingDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="30" />
+          <Property Name="question" Type="nvarchar" MaxLength="50" />
+          <Property Name="answer" Type="nvarchar" MaxLength="80" />
+          <Property Name="roldId" Type="int" Nullable="false" />
+          <Property Name="facebook" Type="bit" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+          <Property Name="mobile" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Category_Details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="categoryID" Type="int" />
+          <Property Name="dateOfEvent" Type="datetime" />
+          <Property Name="status" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="Greeting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="photo" Type="varchar" MaxLength="250" />
+          <Property Name="categoryDetailsID" Type="int" />
+          <Property Name="video" Type="varchar" MaxLength="250" />
+          <Property Name="url" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="accountId" />
+            <PropertyRef Name="serviceId" />
+          </Key>
+          <Property Name="accountId" Type="int" Nullable="false" />
+          <Property Name="serviceId" Type="int" Nullable="false" />
+          <Property Name="amount" Type="money" />
+          <Property Name="expiryDate" Type="date" />
+          <Property Name="paymentNumber" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="details" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Sending">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="greetingId" Type="int" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="senderName" Type="nvarchar" MaxLength="50" />
+          <Property Name="rersiveName" Type="nvarchar" MaxLength="50" />
+          <Property Name="addressTo" Type="nvarchar" MaxLength="50" />
+          <Property Name="customMessenger" Type="nvarchar" MaxLength="250" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="int" Nullable="false" />
+          <Property Name="price" Type="money" />
+        </EntityType>
+        <Association Name="FK_Account_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="roldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Details_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category_Details" Type="Self.Category_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Category_Details">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Greeting_Category_Details">
+          <End Role="Category_Details" Type="Self.Category_Details" Multiplicity="0..1" />
+          <End Role="Greeting" Type="Self.Greeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Details">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Greeting">
+              <PropertyRef Name="categoryDetailsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sending_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Sending" Type="Self.Sending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sending">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sending_Greeting">
+          <End Role="Greeting" Type="Self.Greeting" Multiplicity="1" />
+          <End Role="Sending" Type="Self.Sending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Greeting">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sending">
+              <PropertyRef Name="greetingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GreetingDatabaseModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_Details" EntityType="Self.Category_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Greeting" EntityType="Self.Greeting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sending" EntityType="Self.Sending" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_Role" Association="Self.FK_Account_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Details_Category" Association="Self.FK_Category_Details_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category_Details" EntitySet="Category_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Greeting_Category_Details" Association="Self.FK_Greeting_Category_Details">
+            <End Role="Category_Details" EntitySet="Category_Details" />
+            <End Role="Greeting" EntitySet="Greeting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Account" Association="Self.FK_Payment_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Service" Association="Self.FK_Payment_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sending_Account" Association="Self.FK_Sending_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Sending" EntitySet="Sending" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sending_Greeting" Association="Self.FK_Sending_Greeting">
+            <End Role="Greeting" EntitySet="Greeting" />
+            <End Role="Sending" EntitySet="Sending" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GreetingDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="question" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="answer" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="roldId" Type="Int32" Nullable="false" />
+          <Property Name="facebook" Type="Boolean" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Account_Role" FromRole="Account" ToRole="Role" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_Account" FromRole="Account" ToRole="Payment" />
+          <NavigationProperty Name="Sendings" Relationship="Self.FK_Sending_Account" FromRole="Account" ToRole="Sending" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category_Details" Relationship="Self.FK_Category_Details_Category" FromRole="Category" ToRole="Category_Details" />
+        </EntityType>
+        <EntityType Name="Category_Details">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="categoryID" Type="Int32" />
+          <Property Name="dateOfEvent" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Category_Details_Category" FromRole="Category_Details" ToRole="Category" />
+          <NavigationProperty Name="Greetings" Relationship="Self.FK_Greeting_Category_Details" FromRole="Category_Details" ToRole="Greeting" />
+        </EntityType>
+        <EntityType Name="Greeting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="photo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="categoryDetailsID" Type="Int32" />
+          <Property Name="video" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Category_Details" Relationship="Self.FK_Greeting_Category_Details" FromRole="Greeting" ToRole="Category_Details" />
+          <NavigationProperty Name="Sendings" Relationship="Self.FK_Sending_Greeting" FromRole="Greeting" ToRole="Sending" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="accountId" />
+            <PropertyRef Name="serviceId" />
+          </Key>
+          <Property Name="accountId" Type="Int32" Nullable="false" />
+          <Property Name="serviceId" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="expiryDate" Type="DateTime" Precision="0" />
+          <Property Name="paymentNumber" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Payment_Account" FromRole="Payment" ToRole="Account" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_Payment_Service" FromRole="Payment" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="details" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Role" FromRole="Role" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Sending">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="greetingId" Type="Int32" Nullable="false" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="senderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rersiveName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="addressTo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customMessenger" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Sending_Account" FromRole="Sending" ToRole="Account" />
+          <NavigationProperty Name="Greeting" Relationship="Self.FK_Sending_Greeting" FromRole="Sending" ToRole="Greeting" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_Service" FromRole="Service" ToRole="Payment" />
+        </EntityType>
+        <Association Name="FK_Account_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="roldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sending_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Sending" Type="Self.Sending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sending">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_Details_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Category_Details" Type="Self.Category_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Category_Details">
+              <PropertyRef Name="categoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Greeting_Category_Details">
+          <End Role="Category_Details" Type="Self.Category_Details" Multiplicity="0..1" />
+          <End Role="Greeting" Type="Self.Greeting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_Details">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Greeting">
+              <PropertyRef Name="categoryDetailsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sending_Greeting">
+          <End Role="Greeting" Type="Self.Greeting" Multiplicity="1" />
+          <End Role="Sending" Type="Self.Sending" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Greeting">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sending">
+              <PropertyRef Name="greetingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="serviceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GreetingDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Category_Details" EntityType="Self.Category_Details" />
+          <EntitySet Name="Greetings" EntityType="Self.Greeting" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Sendings" EntityType="Self.Sending" />
+          <EntitySet Name="Services" EntityType="Self.Service" />
+          <AssociationSet Name="FK_Account_Role" Association="Self.FK_Account_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Account" Association="Self.FK_Payment_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sending_Account" Association="Self.FK_Sending_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Sending" EntitySet="Sendings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_Details_Category" Association="Self.FK_Category_Details_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category_Details" EntitySet="Category_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Greeting_Category_Details" Association="Self.FK_Greeting_Category_Details">
+            <End Role="Category_Details" EntitySet="Category_Details" />
+            <End Role="Greeting" EntitySet="Greetings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sending_Greeting" Association="Self.FK_Sending_Greeting">
+            <End Role="Greeting" EntitySet="Greetings" />
+            <End Role="Sending" EntitySet="Sendings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Service" Association="Self.FK_Payment_Service">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GreetingDatabaseModelStoreContainer" CdmEntityContainer="GreetingDatabaseEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="GreetingDatabaseModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="roldId" ColumnName="roldId" />
+                <ScalarProperty Name="facebook" ColumnName="facebook" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="GreetingDatabaseModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_Details">
+            <EntityTypeMapping TypeName="GreetingDatabaseModel.Category_Details">
+              <MappingFragment StoreEntitySet="Category_Details">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+                <ScalarProperty Name="dateOfEvent" ColumnName="dateOfEvent" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Greetings">
+            <EntityTypeMapping TypeName="GreetingDatabaseModel.Greeting">
+              <MappingFragment StoreEntitySet="Greeting">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="categoryDetailsID" ColumnName="categoryDetailsID" />
+                <ScalarProperty Name="video" ColumnName="video" />
+                <ScalarProperty Name="url" ColumnName="url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="GreetingDatabaseModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="serviceId" ColumnName="serviceId" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="expiryDate" ColumnName="expiryDate" />
+                <ScalarProperty Name="paymentNumber" ColumnName="paymentNumber" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="GreetingDatabaseModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="details" ColumnName="details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sendings">
+            <EntityTypeMapping TypeName="GreetingDatabaseModel.Sending">
+              <MappingFragment StoreEntitySet="Sending">
+                <ScalarProperty Name="greetingId" ColumnName="greetingId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="senderName" ColumnName="senderName" />
+                <ScalarProperty Name="rersiveName" ColumnName="rersiveName" />
+                <ScalarProperty Name="addressTo" ColumnName="addressTo" />
+                <ScalarProperty Name="customMessenger" ColumnName="customMessenger" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="GreetingDatabaseModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

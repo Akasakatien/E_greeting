@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DoAnHK3_4.Models.Greeting>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_MyAdminLayoutPage.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <h1>List of Greeting</h1>
+            <h3>@Html.ActionLink("Create", "Create")</h3>
+            <h1 class="text-danger">@ViewContext.TempData["error"]</h1> 
+
+            <div class="table-responsive">
+                <table id="myTable" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.id)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.photo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Category_Details.name)
+                            </th>
+
+                            <th>Option</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.id)
+                                </td>
+                                <td>
+                                    @{ 
+                                        
+                                    }
+                                    <img src="@Url.Content("~/Content/uploadedgreeting/" + item.photo)" width="220" />
+
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Category_Details.name)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                                    <a href="@Url.Action("Delete", "Greetings", new { id = item.id })" onclick="return confirm('Are you sure?')">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+
+
+</script>

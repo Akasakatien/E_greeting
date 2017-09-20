@@ -1,0 +1,54 @@
+﻿@model DoAnHK3_4.Models.Service
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_MyAdminLayoutPage.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{@Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <h3 class="box-title m-b-0">Create new Account</h3>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="exampleInputuname" class="col-sm-3 control-label">@Html.LabelFor(model => model.name)*</label>
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @*required = "required",*@ type = "text", id="exampleInputuname", placeholder="Name",  @class="form-control" } })
+                                </div>
+                                <div class="help-block with-errors">@Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })</div>
+
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label">@Html.LabelFor(model => model.price)*</label>
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="ti-lock"></i></div>
+                                    @Html.EditorFor(model => model.price, new { htmlAttributes = new {type = "text", id="exampleInputpwd2", placeholder="Enter Price", @class = "form-control" } })
+                                </div>
+                                <div class="help-block with-errors">@Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })</div>
+
+                            </div>
+                        </div>
+                        <div class="form-group m-b-0">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-info waves-effect waves-light m-t-10">Create</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+        </div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+                        }
